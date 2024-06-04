@@ -64,6 +64,12 @@ exercicios_links = {
     "Supra": "https://www.youtube.com/watch?v=5cWtCmqaxMw"
 }
 
+limitacoes_exercicios = {
+    "lesao_no_joelho": ["Agachamento Livre", "Leg Press"],
+    "lesao_no_ombro": ["Desenvolvimento com Halteres", "Elevação Lateral", "Elevação Frontal"],
+    "problemas_nas_costas": ["Levantamento Terra", "Agachamento Livre"]
+}
+
 def home(request):
     return render(request, 'recomendacao/home.html')
 
@@ -86,9 +92,11 @@ def recomendacao(request, tempo_treino, grupo_muscular, objetivo_treino, frequen
 
     exercicios = exercicios_por_grupo_muscular[grupo_muscular]
 
-    # Filtro de exercícios com base em limitações físicas e preferências de equipamento
-    if limitacoes_fisicas != "nenhuma":
-        exercicios = [ex for ex in exercicios if limitacoes_fisicas not in explicacao_exercicios[ex].lower()]
+    # Filtro de exercícios com base em limitações físicas
+    if limitacoes_fisicas in limitacoes_exercicios:
+        exercicios = [ex for ex in exercicios if ex not in limitacoes_exercicios[limitacoes_fisicas]]
+
+    # Filtro de exercícios com base em preferências de equipamento
     if preferencias_equipamento != "todos":
         exercicios = [ex for ex in exercicios if preferencias_equipamento in explicacao_exercicios[ex].lower()]
 
