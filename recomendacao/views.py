@@ -1,4 +1,3 @@
-# recomendacao/views.py
 from django.shortcuts import render, redirect
 import random
 
