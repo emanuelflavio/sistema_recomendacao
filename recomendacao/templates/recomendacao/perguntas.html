@@ -38,8 +38,8 @@
                 <label for="tempo_treino">Há quanto tempo você treina?</label>
                 <select id="tempo_treino" name="tempo_treino" class="form-control">
                     <option value="nunca">Nunca</option>
-                    <option value="algum tempo">Algum Tempo</option>
-                    <option value="muito tempo">Muito Tempo</option>
+                    <option value="algum_tempo">Algum Tempo</option>
+                    <option value="muito_tempo">Muito Tempo</option>
                 </select>
             </div>
             <div class="form-group">
@@ -51,6 +51,44 @@
                     <option value="ombros">Ombros</option>
                     <option value="braços">Braços</option>
                     <option value="abdômen">Abdômen</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="objetivo_treino">Qual é o seu principal objetivo?</label>
+                <select id="objetivo_treino" name="objetivo_treino" class="form-control">
+                    <option value="perda_de_peso">Perda de Peso</option>
+                    <option value="ganho_de_massa">Ganho de Massa Muscular</option>
+                    <option value="manter_forma">Manter a Forma</option>
+                    <option value="melhorar_condicionamento">Melhorar Condicionamento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="frequencia_treino">Quantas vezes por semana você pode treinar?</label>
+                <select id="frequencia_treino" name="frequencia_treino" class="form-control">
+                    <option value="1-2">1-2 vezes</option>
+                    <option value="3-4">3-4 vezes</option>
+                    <option value="5-6">5-6 vezes</option>
+                    <option value="todos_os_dias">Todos os dias</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="limitacoes_fisicas">Você possui alguma limitação física?</label>
+                <select id="limitacoes_fisicas" name="limitacoes_fisicas" class="form-control">
+                    <option value="nenhuma">Nenhuma</option>
+                    <option value="lesao_no_joelho">Lesão no Joelho</option>
+                    <option value="lesao_no_ombro">Lesão no Ombro</option>
+                    <option value="problemas_nas_costas">Problemas nas Costas</option>
+                    <option value="outras">Outras</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preferencias_equipamento">Quais equipamentos você prefere usar?</label>
+                <select id="preferencias_equipamento" name="preferencias_equipamento" class="form-control">
+                    <option value="nenhum">Nenhum</option>
+                    <option value="halteres">Halteres</option>
+                    <option value="máquinas">Máquinas</option>
+                    <option value="barra">Barra</option>
+                    <option value="todos">Todos</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Pedir Recomendação</button>

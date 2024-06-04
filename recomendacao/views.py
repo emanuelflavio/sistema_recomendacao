@@ -39,51 +39,60 @@ explicacao_exercicios = {
 }
 
 exercicios_links = {
-    "Flexão de Braço": "https://www.youtube.com/watch?v=ZRXFKqUSGaM",
-    "Supino com Barra": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Supino Inclinado": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Máquina de Peito": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Barra Fixa": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Remada Sentada": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Puxada Alta": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Levantamento Terra": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Agachamento Livre": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Leg Press": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Cadeira Extensora": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Cadeira Flexora": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Desenvolvimento com Halteres": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Elevação Lateral": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Elevação Frontal": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Remada Alta": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Rosca Direta": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Tríceps Pulley": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Rosca Inversa": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Tríceps Coice": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Prancha Abdominal": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Crunch": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Elevação de Pernas": "https://www.youtube.com/watch?v=9Jo8XwFNot4",
-    "Supra": "https://www.youtube.com/watch?v=9Jo8XwFNot4"
+    "Flexão de Braço": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+    "Supino com Barra": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
+    "Supino Inclinado": "https://www.youtube.com/watch?v=DbFgADa2PL8",
+    "Máquina de Peito": "https://www.youtube.com/watch?v=MQHiZk8i2nU",
+    "Barra Fixa": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
+    "Remada Sentada": "https://www.youtube.com/watch?v=GZbfZ033f74",
+    "Puxada Alta": "https://www.youtube.com/watch?v=CAwf7n6Luuc",
+    "Levantamento Terra": "https://www.youtube.com/watch?v=op9kVnSso6Q",
+    "Agachamento Livre": "https://www.youtube.com/watch?v=Dy28eq2PjcM",
+    "Leg Press": "https://www.youtube.com/watch?v=LfhGmaP9dLs",
+    "Cadeira Extensora": "https://www.youtube.com/watch?v=YyvSfVjQeL0",
+    "Cadeira Flexora": "https://www.youtube.com/watch?v=ljOxo0s33sI",
+    "Desenvolvimento com Halteres": "https://www.youtube.com/watch?v=B-aVuyhvLHU",
+    "Elevação Lateral": "https://www.youtube.com/watch?v=3VcKaXpzqRo",
+    "Elevação Frontal": "https://www.youtube.com/watch?v=GSzP1K2rVlU",
+    "Remada Alta": "https://www.youtube.com/watch?v=KB3uGf3DL8Y",
+    "Rosca Direta": "https://www.youtube.com/watch?v=zC3nLlEvin4",
+    "Tríceps Pulley": "https://www.youtube.com/watch?v=2-LAMcpzODU",
+    "Rosca Inversa": "https://www.youtube.com/watch?v=MEyLWigabCI",
+    "Tríceps Coice": "https://www.youtube.com/watch?v=2-LAMcpzODU",
+    "Prancha Abdominal": "https://www.youtube.com/watch?v=pSHjTRCQxIw",
+    "Crunch": "https://www.youtube.com/watch?v=Xyd_fa5zoEU",
+    "Elevação de Pernas": "https://www.youtube.com/watch?v=JB2oyawG9KI",
+    "Supra": "https://www.youtube.com/watch?v=5cWtCmqaxMw"
 }
-
 
 def home(request):
     return render(request, 'recomendacao/home.html')
-
 
 def perguntas(request):
     if request.method == "POST":
         tempo_treino = request.POST.get("tempo_treino")
         grupo_muscular = request.POST.get("grupo_muscular")
-        return redirect('recomendacao:recomendacao', tempo_treino=tempo_treino, grupo_muscular=grupo_muscular)
+        objetivo_treino = request.POST.get("objetivo_treino")
+        frequencia_treino = request.POST.get("frequencia_treino")
+        limitacoes_fisicas = request.POST.get("limitacoes_fisicas")
+        preferencias_equipamento = request.POST.get("preferencias_equipamento")
+        
+        return redirect('recomendacao:recomendacao', tempo_treino=tempo_treino, grupo_muscular=grupo_muscular, objetivo_treino=objetivo_treino, frequencia_treino=frequencia_treino, limitacoes_fisicas=limitacoes_fisicas, preferencias_equipamento=preferencias_equipamento)
     return render(request, 'recomendacao/perguntas.html')
 
-
-def recomendacao(request, tempo_treino, grupo_muscular):
+def recomendacao(request, tempo_treino, grupo_muscular, objetivo_treino, frequencia_treino, limitacoes_fisicas, preferencias_equipamento):
     grupo_muscular = grupo_muscular.lower()
     if grupo_muscular not in exercicios_por_grupo_muscular:
         return render(request, 'recomendacao/error.html', {"message": "Grupo muscular não reconhecido."})
 
     exercicios = exercicios_por_grupo_muscular[grupo_muscular]
+
+    # Filtro de exercícios com base em limitações físicas e preferências de equipamento
+    if limitacoes_fisicas != "nenhuma":
+        exercicios = [ex for ex in exercicios if limitacoes_fisicas not in explicacao_exercicios[ex].lower()]
+    if preferencias_equipamento != "todos":
+        exercicios = [ex for ex in exercicios if preferencias_equipamento in explicacao_exercicios[ex].lower()]
+
     random.shuffle(exercicios)
     recomendados = exercicios[:3]
     explicacoes_links = [
@@ -98,7 +107,11 @@ def recomendacao(request, tempo_treino, grupo_muscular):
     context = {
         "explicacoes_links": explicacoes_links,
         "tempo_treino": tempo_treino,
-        "grupo_muscular": grupo_muscular.capitalize()
+        "grupo_muscular": grupo_muscular.capitalize(),
+        "objetivo_treino": objetivo_treino,
+        "frequencia_treino": frequencia_treino,
+        "limitacoes_fisicas": limitacoes_fisicas,
+        "preferencias_equipamento": preferencias_equipamento
     }
 
     return render(request, 'recomendacao/recomendacao.html', context)
