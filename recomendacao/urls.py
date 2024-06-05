@@ -7,5 +7,5 @@ app_name = 'recomendacao'
 urlpatterns = [
     path('', views.home, name='home'),
     path('perguntas/', views.perguntas, name='perguntas'),
-    path('recomendacao/<str:tempo_treino>/<str:grupo_muscular>/', views.recomendacao, name='recomendacao'),
+    path('recomendacao/<str:tempo_treino>/<str:grupo_muscular>/<str:objetivo>', views.recomendacao, name='recomendacao'),
 ]

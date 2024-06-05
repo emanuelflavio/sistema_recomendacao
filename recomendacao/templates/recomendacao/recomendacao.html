@@ -6,8 +6,40 @@
     <title>Academia - Recomendação</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+        }
+
+        .lead {
+            font-size: 20px;
+        }
+
+        h1, h2 {
+            color: #343a40;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
@@ -31,8 +63,8 @@
 
     <!-- Main content -->
     <div class="container mt-5">
-        <h1 class="text-center">Recomendação de Exercícios</h1>
-        <p class="lead text-center">Tempo de inatividade: {{ tempo_treino }}</p>
+        <h1 class="text-center">Recomendação</h1>
+
         <h2 class="mt-4">Exercícios recomendados para {{ grupo_muscular }}:</h2>
         <ul class="list-group mt-3">
             {% for item in explicacoes_links %}
@@ -43,10 +75,30 @@
             </li>
             {% endfor %}
         </ul>
+    </div>
+
+    <!-- Recomendação de tempo de treino -->
+    <div class="container mt-5">
+        <h2 class="mt-4">Recomendações adicionais</h2>
+    </div>
+
+    <!-- Recomendação para o objetivo de treino -->
+    <div class="container mt-5">
+        <ul class="list-group mt-3">
+            <li class="list-group-item">
+                <p>{{obj_rec}}</p>
+            </li>
+            <li class="list-group-item">
+                <p>{{tempo_rec}}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="container mt-5">
         <a href="{% url 'recomendacao:home' %}">
             <button class="btn btn-secondary btn-block mt-4">Voltar para a Home</button>
         </a>
     </div>
+
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
