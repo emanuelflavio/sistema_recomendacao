@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import random
 
+# Definindo os exercícios por grupo muscular
 exercicios_por_grupo_muscular = {
     "peito": ["Flexão de Braço", "Supino com Barra", "Supino Inclinado", "Máquina de Peito"],
     "costas": ["Barra Fixa", "Remada Sentada", "Puxada Alta", "Levantamento Terra"],
@@ -10,6 +11,7 @@ exercicios_por_grupo_muscular = {
     "abdômen": ["Prancha Abdominal", "Crunch", "Elevação de Pernas", "Supra"]
 }
 
+# Explicação dos exercícios
 explicacao_exercicios = {
     "Flexão de Braço": "Exercício que fortalece os músculos peitorais, deltoides e tríceps.",
     "Supino com Barra": "Excelente para desenvolver o peitoral, os deltoides anteriores e os tríceps.",
@@ -37,6 +39,7 @@ explicacao_exercicios = {
     "Supra": "Fortalece os músculos oblíquos e abdominais."
 }
 
+# Links dos exercícios
 exercicios_links = {
     "Flexão de Braço": "https://www.youtube.com/watch?v=IODxDxX7oi4",
     "Supino com Barra": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
@@ -64,6 +67,7 @@ exercicios_links = {
     "Supra": "https://www.youtube.com/watch?v=5cWtCmqaxMw"
 }
 
+# Exercícios a evitar com base nas limitações físicas
 limitacoes_exercicios = {
     "lesao_no_joelho": ["Agachamento Livre", "Leg Press"],
     "lesao_no_ombro": ["Desenvolvimento com Halteres", "Elevação Lateral", "Elevação Frontal"],
@@ -92,16 +96,38 @@ def recomendacao(request, tempo_treino, grupo_muscular, objetivo_treino, frequen
 
     exercicios = exercicios_por_grupo_muscular[grupo_muscular]
 
-    # Filtro de exercícios com base em limitações físicas
-    if limitacoes_fisicas in limitacoes_exercicios:
-        exercicios = [ex for ex in exercicios if ex not in limitacoes_exercicios[limitacoes_fisicas]]
+    # Adicionando sugestões gerais baseadas no tempo de treino e objetivo do usuário
+    sugestoes = []
+    if tempo_treino == "nunca":
+        sugestoes.append("Recomenda-se começar com alongamentos e um aquecimento cardiovascular leve antes do treino.")
+    elif tempo_treino == "muito_tempo":
+        sugestoes.append("Considere aumentar a carga dos exercícios para continuar a progressão.")
 
-    # Filtro de exercícios com base em preferências de equipamento
+    if objetivo_treino == "perda_de_peso":
+        sugestoes.append("Inclua exercícios cardiovasculares intensos e de alta repetição para ajudar na perda de peso.")
+    elif objetivo_treino == "ganho_de_massa":
+        sugestoes.append("Concentre-se em exercícios com carga pesada e baixa repetição para aumentar a massa muscular.")
+    elif objetivo_treino == "manter_forma":
+        sugestoes.append("Mantenha um equilíbrio entre exercícios de força e cardiovasculares para manter a forma.")
+    elif objetivo_treino == "melhorar_condicionamento":
+        sugestoes.append("Inclua exercícios variados e de alta intensidade para melhorar o condicionamento físico geral.")
+
+    if frequencia_treino in ["1-2", "3-4"]:
+        sugestoes.append("Recomenda-se treinar mais de um grupo muscular por sessão, devido à frequência de treino limitada.")
+
+    # Filtrando exercícios com base em limitações físicas
+    exercicios_filtrados = [ex for ex in exercicios if ex not in limitacoes_exercicios.get(limitacoes_fisicas, [])]
+
+    # Filtrando exercícios com base em preferências de equipamento
     if preferencias_equipamento != "todos":
-        exercicios = [ex for ex in exercicios if preferencias_equipamento in explicacao_exercicios[ex].lower()]
+        exercicios_filtrados = [ex for ex in exercicios_filtrados if preferencias_equipamento in explicacao_exercicios[ex].lower()]
 
-    random.shuffle(exercicios)
-    recomendados = exercicios[:3]
+    # Garantindo que sempre haja exercícios disponíveis
+    if not exercicios_filtrados:
+        return render(request, 'recomendacao/error.html', {"message": "Não há exercícios disponíveis para as condições fornecidas."})
+    
+    random.shuffle(exercicios_filtrados)
+    recomendados = exercicios_filtrados[:3]
     explicacoes_links = [
         {
             "exercicio": exercicio,
@@ -118,7 +144,8 @@ def recomendacao(request, tempo_treino, grupo_muscular, objetivo_treino, frequen
         "objetivo_treino": objetivo_treino,
         "frequencia_treino": frequencia_treino,
         "limitacoes_fisicas": limitacoes_fisicas,
-        "preferencias_equipamento": preferencias_equipamento
+        "preferencias_equipamento": preferencias_equipamento,
+        "sugestoes": sugestoes
     }
 
     return render(request, 'recomendacao/recomendacao.html', context)

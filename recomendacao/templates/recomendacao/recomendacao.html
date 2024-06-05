@@ -76,6 +76,14 @@
             </li>
             {% endfor %}
         </ul>
+
+        <h2 class="mt-4">Sugestões adicionais:</h2>
+        <ul class="list-group mt-3">
+            {% for sugestao in sugestoes %}
+            <li class="list-group-item">{{ sugestao }}</li>
+            {% endfor %}
+        </ul>
+
         <a href="{% url 'recomendacao:home' %}">
             <button class="btn btn-secondary btn-block mt-4">Voltar para a Home</button>
         </a>
