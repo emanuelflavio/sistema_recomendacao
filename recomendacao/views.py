@@ -124,8 +124,8 @@ def recomendacao(request, tempo_treino, grupo_muscular, objetivo_treino, frequen
 
     # Garantindo que sempre haja exercícios disponíveis
     if not exercicios_filtrados:
-        return render(request, 'recomendacao/error.html', {"message": "Não há exercícios disponíveis para as condições fornecidas."})
-    
+        exercicios_filtrados = exercicios  # Se nenhum exercício passar pela filtragem, usar todos os exercícios do grupo muscular
+
     random.shuffle(exercicios_filtrados)
     recomendados = exercicios_filtrados[:3]
     explicacoes_links = [
